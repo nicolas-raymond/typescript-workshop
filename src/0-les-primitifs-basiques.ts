@@ -115,7 +115,7 @@ export function testGenericsTypes() {
   /**
    * Utiliser un type générique pour typer la sortie
    */
-  // function parseJSON<______>(input: string): unknown {
+  // function parseJSON<______>(input: string): _____ {
   //     return JSON.parse(input)
   // }
   // const inferredFromOutput: {otherProp: string} = parseJSON('{otherProp:"tata"}');
@@ -126,7 +126,7 @@ export function testGenericsTypes() {
   /**
    * Utiliser un type générique pour typer un paramètre
    */
-  // function addProp<______>(input: Record<string, string>) {
+  // function addProp<______>(input: _____) {
   //     return {...input, newProp: 'yeahh'}
   // }
   //
