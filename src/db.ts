@@ -33,10 +33,15 @@ export type ShoppingDatabase = {
   products: ProductTable;
 };
 
-export const buildContext = () => {
-  return {
-    $db: undefined,
-  };
+type EmptyContext<DB> = {
+  /*
+  * @deprecated type only, do not use at runtime
+  */
+  $db: DB
+}
+
+export const buildContext = <DB>() => {
+  return {$db: undefined} as EmptyContext<DB>;
 };
 
 export const selectFrom = (ctx: any, tableName: any) => ({
