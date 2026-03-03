@@ -44,13 +44,23 @@ export const buildContext = <DB>() => {
   return {$db: undefined} as EmptyContext<DB>;
 };
 
-export const selectFrom = (ctx: any, tableName: any) => ({
+type SelectableContext<Ctx> = EmptyContext<Ctx> & {
+  _operation: string;
+  _table: keyof Ctx;
+};
+
+export const selectFrom = <
+    Ctx extends EmptyContext<any>,
+    TB extends keyof Ctx["$db"]>(ctx: Ctx, tableName: TB) => ({ // TODO use SelectableContext?
   ...ctx,
   _operation: "select",
   _table: tableName,
 });
 
-export const selectFields = (ctx: any, fieldNames: any[]) => ({
+export const selectFields = <Ctx extends SelectableContext<any>>(
+    ctx: Ctx,
+    fieldNames: (keyof Ctx["$db"][Ctx["_table"]])[]
+) => ({
   ...ctx,
   _fields: fieldNames,
 });
